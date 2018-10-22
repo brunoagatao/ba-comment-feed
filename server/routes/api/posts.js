@@ -4,6 +4,7 @@ const config = require('../../../config/config');
 
 const router = express.Router();
 
+const MLAB_URI = process.env.MLAB_URI || config.MLAB_URI;
 const loadPostsCollection = async () => {
   const client = await mongodb.MongoClient.connect(
     config.MLAB_URI,
