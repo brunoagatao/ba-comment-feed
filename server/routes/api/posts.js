@@ -1,13 +1,17 @@
 const express = require('express');
 const mongodb = require('mongodb');
-const config = require('../../../config/config');
 
 const router = express.Router();
 
-const MLAB_URI = process.env.MLAB_URI || config.MLAB_URI;
+let MLAB_URI = process.env.MLAB_URI;
+if (!MLAB_URI) {
+  const config = require('../../../config/config');
+  MLAB_URI = config.MLAB_URI;
+}
+
 const loadPostsCollection = async () => {
   const client = await mongodb.MongoClient.connect(
-    config.MLAB_URI,
+    MLAB_URI,
     { useNewUrlParser: true }
   );
 
